@@ -29,7 +29,7 @@ public class App {
         @Override
         public void handle(HttpExchange t) throws IOException {
             String htmlResponse = "<html>" +
-                "<head><title>Online Grocery Delivery</title>" +
+                "<head><meta charset=\"UTF-8\"><title>Online Grocery Delivery</title>" +
                 "<style>" +
                 "body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }" +
                 ".container { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; max-width: 500px; }" +
@@ -51,9 +51,11 @@ public class App {
                 "</body>" +
                 "</html>";
             
-            t.sendResponseHeaders(200, htmlResponse.getBytes().length);
+            byte[] responseBytes = htmlResponse.getBytes("UTF-8");
+            t.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
+            t.sendResponseHeaders(200, responseBytes.length);
             OutputStream os = t.getResponseBody();
-            os.write(htmlResponse.getBytes());
+            os.write(responseBytes);
             os.close();
         }
     }
