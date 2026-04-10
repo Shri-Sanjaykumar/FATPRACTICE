@@ -1,2 +1,4 @@
-App$MyHandler.class
+App$CheckoutHandler.class
 App.class
+App$LoginHandler.class
+App$UIHandler.class
