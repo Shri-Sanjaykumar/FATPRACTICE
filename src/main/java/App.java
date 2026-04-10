@@ -31,7 +31,7 @@ public class App {
     static class UIHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-            byte[] responseBytes = getHtml().getBytes(StandardCharsets.UTF-8);
+            byte[] responseBytes = getHtml().getBytes(StandardCharsets.UTF_8);
             t.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
             t.sendResponseHeaders(200, responseBytes.length);
             OutputStream os = t.getResponseBody();
@@ -45,7 +45,7 @@ public class App {
         public void handle(HttpExchange t) throws IOException {
             if ("POST".equals(t.getRequestMethod())) {
                 InputStream is = t.getRequestBody();
-                String body = new String(is.readAllBytes(), StandardCharsets.UTF-8);
+                String body = new String(is.readAllBytes(), StandardCharsets.UTF_8);
                 
                 String[] pairs = body.split("&");
                 int items = 0;
@@ -77,7 +77,7 @@ public class App {
                     code = 400;
                 }
                 
-                byte[] responseBytes = response.getBytes(StandardCharsets.UTF-8);
+                byte[] responseBytes = response.getBytes(StandardCharsets.UTF_8);
                 t.getResponseHeaders().set("Content-Type", "text/plain; charset=UTF-8");
                 t.sendResponseHeaders(code, responseBytes.length);
                 OutputStream os = t.getResponseBody();
